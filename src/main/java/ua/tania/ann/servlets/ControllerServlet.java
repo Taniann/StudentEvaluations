@@ -34,6 +34,9 @@ public class ControllerServlet extends HttpServlet {
 
         try {
             switch (action) {
+                case "/new":
+                    showNewForm(request, response);
+                    break;
                 case "/insert":
                     insertStudent(request, response);
                     break;
@@ -52,7 +55,13 @@ public class ControllerServlet extends HttpServlet {
             throws SQLException, IOException, ServletException, ClassNotFoundException {
         List<Student> listStudent = studentDAO.listAllStudents();
         request.setAttribute("listStudent", listStudent);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("StudentList.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("StudentForm.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -70,5 +79,4 @@ public class ControllerServlet extends HttpServlet {
         studentDAO.insertStudent(newStudent);
         response.sendRedirect("list");
     }
-
 }

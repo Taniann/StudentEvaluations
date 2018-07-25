@@ -27,18 +27,18 @@ public class StudentDAO {
     }
 
     public boolean insertStudent(Student student) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO student (first_name, second_name, middle_name, kurse, grupa, study_form, payment_form)" +
+        String sql = "INSERT INTO student (first_name, second_name, middle_name, kurs, grupa, study_form, payment_form)" +
                 " VALUES (?, ?, ?, ?, ?, ?, ?)";
         connect();
 
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setString(2, student.getFirstName());
-        statement.setString(3, student.getSecondName());
-        statement.setString(4, student.getMiddleName());
-        statement.setInt(5, student.getKurs());
-        statement.setString(6, student.getGroup());
-        statement.setString(7, student.getStudyForm());
-        statement.setString(8, student.getPaymentForm());
+        statement.setString(1, student.getFirstName());
+        statement.setString(2, student.getSecondName());
+        statement.setString(3, student.getMiddleName());
+        statement.setInt(4, student.getKurs());
+        statement.setString(5, student.getGroup());
+        statement.setString(6, student.getStudyForm());
+        statement.setString(7, student.getPaymentForm());
 
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
@@ -49,7 +49,7 @@ public class StudentDAO {
     public List<Student> listAllStudents() throws SQLException, ClassNotFoundException {
         List<Student> listStudent = new ArrayList<>();
 
-        String sql = "SELECT * FROM student_evaluations";
+        String sql = "SELECT* FROM student";
 
         connect();
 
