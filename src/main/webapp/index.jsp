@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Student Evaluations Application</title>
@@ -29,13 +30,13 @@
             <c:forEach var="student" items="${listStudent}">
                 <tr>
                     <td><c:out value="${student.id}" /></td>
-                    <td><c:out value="${student.first_name}" /></td>
-                    <td><c:out value="${student.second_name}" /></td>
-                    <td><c:out value="${student.middle_name}" /></td>
+                    <td><c:out value="${student.firstName}" /></td>
+                    <td><c:out value="${student.secondName}" /></td>
+                    <td><c:out value="${student.middleName}" /></td>
                     <td><c:out value="${student.kurs}" /></td>
-                    <td><c:out value="${student.grupa}" /></td>
-                    <td><c:out value="${student.study_form}" /></td>
-                    <td><c:out value="${student.payment_form}" /></td>
+                    <td><c:out value="${student.group}" /></td>
+                    <td><c:out value="${student.studyForm}" /></td>
+                    <td><c:out value="${student.paymentForm}" /></td>
                 </tr>
             </c:forEach>
         </table>

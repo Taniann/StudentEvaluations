@@ -3,7 +3,6 @@ package ua.tania.ann.model.dao;
 import ua.tania.ann.model.entities.Student;
 import ua.tania.ann.utils.MySqlConnUtils;
 
-import java.awt.print.Book;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +13,13 @@ import java.util.List;
 public class StudentDAO {
     private Connection jdbcConnection;
 
-    protected void connect() throws SQLException, ClassNotFoundException {
+    protected void connectToDatabase() throws SQLException, ClassNotFoundException {
         if (jdbcConnection == null || jdbcConnection.isClosed()) {
             jdbcConnection = MySqlConnUtils.getMySQLConnection();
         }
     }
 
-    protected void disconnect() throws SQLException {
+    protected void disconnectFromDatabase() throws SQLException {
         if (jdbcConnection != null && !jdbcConnection.isClosed()) {
             jdbcConnection.close();
         }
@@ -29,7 +28,7 @@ public class StudentDAO {
     public boolean insertStudent(Student student) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO student (first_name, second_name, middle_name, kurs, grupa, study_form, payment_form)" +
                 " VALUES (?, ?, ?, ?, ?, ?, ?)";
-        connect();
+        connectToDatabase();
 
         PreparedStatement statement = jdbcConnection.prepareStatement(sql);
         statement.setString(1, student.getFirstName());
@@ -42,16 +41,16 @@ public class StudentDAO {
 
         boolean rowInserted = statement.executeUpdate() > 0;
         statement.close();
-        disconnect();
+        disconnectFromDatabase();
         return rowInserted;
     }
 
     public List<Student> listAllStudents() throws SQLException, ClassNotFoundException {
-        List<Student> listStudent = new ArrayList<>();
+        List<Student> listStudents = new ArrayList<>();
 
         String sql = "SELECT* FROM student";
 
-        connect();
+        connectToDatabase();
 
         Statement statement = jdbcConnection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
@@ -66,14 +65,14 @@ public class StudentDAO {
             String studyForm = resultSet.getString("study_form");
             String paymentForm = resultSet.getString("payment_form");
             Student student = new Student(id, firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
-            listStudent.add(student);
+            listStudents.add(student);
         }
 
         resultSet.close();
         statement.close();
 
-        disconnect();
+        disconnectFromDatabase();
 
-        return listStudent;
+        return listStudents;
     }
 }
