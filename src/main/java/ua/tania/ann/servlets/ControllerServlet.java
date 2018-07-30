@@ -1,7 +1,9 @@
 package ua.tania.ann.servlets;
 
 import ua.tania.ann.model.dao.StudentDAO;
+import ua.tania.ann.model.dao.SubjectDAO;
 import ua.tania.ann.model.entities.Student;
+import ua.tania.ann.model.entities.Subject;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,9 +20,11 @@ import java.util.List;
 public class ControllerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private StudentDAO studentDAO;
+    private SubjectDAO subjectDAO;
 
     public void init() {
         studentDAO = new StudentDAO();
+        subjectDAO = new SubjectDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -40,6 +44,8 @@ public class ControllerServlet extends HttpServlet {
                 case "/insert":
                     insertStudent(request, response);
                     break;
+                case "/listSubject":
+                     listSubject(request, response);
                 default:
                     listStudent(request, response);
                     break;
@@ -55,7 +61,7 @@ public class ControllerServlet extends HttpServlet {
             throws SQLException, IOException, ServletException, ClassNotFoundException {
         List<Student> listStudent = studentDAO.listAllStudents();
         request.setAttribute("listStudent", listStudent);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("StudentList.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -78,5 +84,13 @@ public class ControllerServlet extends HttpServlet {
         Student newStudent = new Student(firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
         studentDAO.insertStudent(newStudent);
         response.sendRedirect("list");
+    }
+
+    private void listSubject(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException, ClassNotFoundException {
+        List<Subject> listSubject = subjectDAO.listAllSubjects();
+        request.setAttribute("listSubject", listSubject);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("SubjectList.jsp");
+        dispatcher.forward(request, response);
     }
 }

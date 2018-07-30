@@ -12,6 +12,7 @@
             <a href="/new">Add New Student</a>
             &nbsp;&nbsp;&nbsp;
             <a href="/list">List All Students</a>
+            <a href="/listSubject">List of Subjects</a>
         </h2>
     </center>
     <div align="center">
@@ -26,6 +27,7 @@
                 <th>Grupa</th>
                 <th>Study form</th>
                 <th>Payment form</th>
+                <th>Actions</th>
             </tr>
             <c:forEach var="student" items="${listStudent}">
                 <tr>
@@ -37,6 +39,11 @@
                     <td><c:out value="${student.group}" /></td>
                     <td><c:out value="${student.studyForm}" /></td>
                     <td><c:out value="${student.paymentForm}" /></td>
+                    <td>
+                        <a href="/edit?id=<c:out value='${student.id}' />">Edit</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/delete?id=<c:out value='${student.id}' />">Delete</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

@@ -1,5 +1,8 @@
 package ua.tania.ann.model.entities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Таня on 25.07.2018.
  */
@@ -12,6 +15,10 @@ public class Student {
     private String group;
     private String studyForm;
     private String paymentForm;
+    private Map<Subject, Score> resultForFirstAtestation = new HashMap<>();
+    private Map<Subject, Score> resultForSecondAtestation = new HashMap<>();
+    private Map<Subject, Score> finalResult = new HashMap<>();
+    private Double finalAverageValue;
 
     public Student(int id, String firstName, String secondName, String middleName, int kurs, String group,
                    String studyForm, String paymentForm) {
@@ -97,5 +104,37 @@ public class Student {
 
     public void setKurs(int kurs) {
         this.kurs = kurs;
+    }
+
+    public Map<Subject, Score> getResultForFirstAtestation() {
+        return resultForFirstAtestation;
+    }
+
+    public void setResultForFirstAtestation(Map<Subject, Score> resultForFirstAtestation) {
+        this.resultForFirstAtestation = resultForFirstAtestation;
+    }
+
+    public Map<Subject, Score> getResultForSecondAtestation() {
+        return resultForSecondAtestation;
+    }
+
+    public void setResultForSecondAtestation(Map<Subject, Score> resultForSecondAtestation) {
+        this.resultForSecondAtestation = resultForSecondAtestation;
+    }
+
+    public Map<Subject, Score> getFinalResult() {
+        return finalResult;
+    }
+
+    public void setFinalResult(Map<Subject, Score> finalResult) {
+        this.finalResult = finalResult;
+    }
+
+    public Double getFinalAverageValue() {
+        return finalAverageValue;
+    }
+
+    public void setFinalAverageValue(Double finalAverageValue) {
+        this.finalAverageValue = finalAverageValue;
     }
 }
