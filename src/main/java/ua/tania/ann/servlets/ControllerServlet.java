@@ -46,6 +46,7 @@ public class ControllerServlet extends HttpServlet {
                     break;
                 case "/listSubject":
                      listSubject(request, response);
+                    break;
                 default:
                     listStudent(request, response);
                     break;

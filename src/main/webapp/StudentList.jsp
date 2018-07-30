@@ -12,6 +12,7 @@
             <a href="/new">Add New Student</a>
             &nbsp;&nbsp;&nbsp;
             <a href="/list">List All Students</a>
+            &nbsp;&nbsp;&nbsp;
             <a href="/listSubject">List of Subjects</a>
         </h2>
     </center>
