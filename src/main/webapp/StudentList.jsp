@@ -14,6 +14,8 @@
             <a href="/list">List All Students</a>
             &nbsp;&nbsp;&nbsp;
             <a href="/listSubject">List of Subjects</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="/listScores">List of Scores</a>
         </h2>
     </center>
     <div align="center">

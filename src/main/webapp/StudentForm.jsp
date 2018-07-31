@@ -14,25 +14,14 @@
             <a href="/list">List All Students</a>
 
         </h2>
-    </center>
-    <div align="center">
-           <c:if test="${student != null}">
-               <form action="update" method="post">
-           </c:if>
-           <c:if test="${student == null}">
-               <form action="insert" method="post">
-           </c:if>
-           <table border="1" cellpadding="5">
-               <caption>
-                   <h2>
-                       <c:if test="${student != null}">
-                           Edit Student
-                       </c:if>
-                       <c:if test="${student == null}">
-                           Add New Student
-                       </c:if>
-                   </h2>
-               </caption>
+     <div align="center">
+            <c:if test="${student != null}">
+                <form action="update" method="post">
+            </c:if>
+            <c:if test="${student == null}">
+                <form action="insert" method="post">
+            </c:if>
+            <table border="1" cellpadding="5">
                 <c:if test="${student != null}">
                     <input type="hidden" name="id" value="<c:out value='${student.id}' />" />
                 </c:if>
@@ -40,14 +29,14 @@
                 <th>First name: </th>
                 <td>
                     <input type="text" name="first_name" size="45"
-                            value="<c:out value='${student.first_name}' />" />
+                            value="<c:out value='${student.firstName}' />" />
                 </td>
             </tr>
             <tr>
                 <th>Second name: </th>
                 <td>
                     <input type="text" name="second_name" size="45"
-                            value="<c:out value='${student.second_name}' />"
+                            value="<c:out value='${student.secondName}' />"
                     />
                 </td>
             </tr>
@@ -55,7 +44,7 @@
                 <th>Middle name: </th>
                 <td>
                     <input type="text" name="middle_name" size="5"
-                            value="<c:out value='${student.middle_name}' />"
+                            value="<c:out value='${student.middleName}' />"
                     />
                 </td>
             </tr>
@@ -71,7 +60,7 @@
                  <th>Grupa: </th>
                  <td>
                     <input type="text" name="grupa" size="5"
-                             value="<c:out value='${student.grupa}' />"
+                             value="<c:out value='${student.group}' />"
                      />
                  </td>
             </tr>
@@ -79,15 +68,15 @@
                  <th>Study form: </th>
                  <td>
                     <input type="text" name="study_form" size="5"
-                             value="<c:out value='${student.study_form}' />"
+                             value="<c:out value='${student.studyForm}' />"
                      />
                  </td>
             </tr>
             <tr>
-                 <th>Middle name: </th>
+                 <th>Payment form: </th>
                  <td>
                     <input type="text" name="payment_form" size="5"
-                             value="<c:out value='${student.payment_form}' />"
+                             value="<c:out value='${student.paymentForm}' />"
                      />
                  </td>
             </tr>

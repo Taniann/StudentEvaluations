@@ -75,4 +75,67 @@ public class StudentDAO {
 
         return listStudents;
     }
+
+    public boolean deleteStudent(Student student) throws SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM student where id = ?";
+
+        connectToDatabase();
+
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setInt(1, student.getId());
+
+        boolean rowDeleted = statement.executeUpdate() > 0;
+        statement.close();
+        disconnectFromDatabase();
+        return rowDeleted;
+    }
+
+    public boolean updateStudent(Student student) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE student SET first_name = ?, second_name = ?, middle_name = ?, " +
+                "kurs = ?, grupa = ?, study_form = ?, payment_form = ?";
+        sql += " WHERE id = ?";
+        connectToDatabase();
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1, student.getFirstName());
+        statement.setString(2, student.getSecondName());
+        statement.setString(3, student.getMiddleName());
+        statement.setInt(4, student.getKurs());
+        statement.setString(5, student.getGroup());
+        statement.setString(6, student.getStudyForm());
+        statement.setString(7, student.getPaymentForm());
+        statement.setInt(8, student.getId());
+
+        boolean rowUpdated = statement.executeUpdate() > 0;
+        statement.close();
+        disconnectFromDatabase();
+        return rowUpdated;
+    }
+
+    public Student getStudent(int id) throws SQLException, ClassNotFoundException {
+        Student student = null;
+        String sql = "SELECT * FROM student WHERE id = ?";
+
+        connectToDatabase();
+
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setInt(1, id);
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            String firstName = resultSet.getString("first_name");
+            String secondName = resultSet.getString("second_name");
+            String middleName = resultSet.getString("middle_name");
+            int kurs = resultSet.getInt("kurs");
+            String grupa = resultSet.getString("grupa");
+            String studyForm = resultSet.getString("study_form");
+            String paymentForm = resultSet.getString("payment_form");
+            student = new Student(id, firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
+        }
+
+        resultSet.close();
+        statement.close();
+
+        return student;
+    }
 }

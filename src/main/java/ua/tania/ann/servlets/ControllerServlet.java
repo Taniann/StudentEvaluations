@@ -44,8 +44,20 @@ public class ControllerServlet extends HttpServlet {
                 case "/insert":
                     insertStudent(request, response);
                     break;
+                case "/edit":
+                    showEditForm(request, response);
+                    break;
+                case "/update":
+                    updateStudent(request, response);
+                    break;
+                case "/delete":
+                    deleteStudent(request, response);
+                    break;
                 case "/listSubject":
                      listSubject(request, response);
+                    break;
+                case "/addSubject":
+                    insertSubject(request, response);
                     break;
                 default:
                     listStudent(request, response);
@@ -72,6 +84,16 @@ public class ControllerServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException, ClassNotFoundException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Student existingStudent = studentDAO.getStudent(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("StudentForm.jsp");
+        request.setAttribute("student", existingStudent);
+        dispatcher.forward(request, response);
+
+    }
+
     private void insertStudent(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ClassNotFoundException {
         String firstName = request.getParameter("first_name");
@@ -87,6 +109,32 @@ public class ControllerServlet extends HttpServlet {
         response.sendRedirect("list");
     }
 
+    private void updateStudent(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ClassNotFoundException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String firstName = request.getParameter("first_name");
+        String secondName = request.getParameter("second_name");
+        String middleName = request.getParameter("middle_name");
+        int kurs = Integer.parseInt( request.getParameter("kurs"));
+        String grupa = request.getParameter("grupa");
+        String studyForm = request.getParameter("study_form");
+        String paymentForm = request.getParameter("payment_form");
+
+        Student student = new Student(id,firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
+        studentDAO.updateStudent(student);
+        response.sendRedirect("list");
+    }
+
+    private void deleteStudent(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ClassNotFoundException {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        Student student = new Student(id);
+        studentDAO.deleteStudent(student);
+        response.sendRedirect("list");
+
+    }
+
     private void listSubject(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException, ClassNotFoundException {
         List<Subject> listSubject = subjectDAO.listAllSubjects();
@@ -94,4 +142,14 @@ public class ControllerServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("SubjectList.jsp");
         dispatcher.forward(request, response);
     }
+
+    private void insertSubject(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ClassNotFoundException {
+        String name = request.getParameter("name");
+
+        Subject newSubject = new Subject(name);
+        subjectDAO.insertSubject(newSubject);
+        response.sendRedirect("listSubject");
+    }
+
 }

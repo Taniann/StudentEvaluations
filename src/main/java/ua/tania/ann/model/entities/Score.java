@@ -7,12 +7,19 @@ public class Score {
     private int id;
     private int value;
     private int studentId;
-    private int subjectId;
+    private String subjectName;
 
-    public Score(int value, int studentId, int subjectId) {
+    public Score(int value, int studentId, String subjectName) {
         this.value = value;
         this.studentId = studentId;
-        this.subjectId = subjectId;
+        this.subjectName = subjectName;
+    }
+
+    public Score(int id, int value, int studentId, String subjectName) {
+        this.id = id;
+        this.value = value;
+        this.studentId = studentId;
+        this.subjectName = subjectName;
     }
 
     public int getId() {
@@ -39,11 +46,11 @@ public class Score {
         this.studentId = studentId;
     }
 
-    public int getSubjectId() {
-        return subjectId;
+    public String getSubjectName() {
+        return subjectName;
     }
 
-    public void setSubjectId(int subjectId) {
-        this.subjectId = subjectId;
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 }
