@@ -46,6 +46,8 @@
                         <a href="/edit?id=<c:out value='${student.id}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="/delete?id=<c:out value='${student.id}' />">Delete</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/addScores?id=<c:out value='${student.id}' />">Add scores</a>
                     </td>
                 </tr>
             </c:forEach>

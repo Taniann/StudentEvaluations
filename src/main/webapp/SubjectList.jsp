@@ -43,7 +43,7 @@
                     <input type="hidden" name="id" value="<c:out value='${subject.id}' />" />
                 </c:if>
             <tr>
-                <th>First name: </th>
+                <th>Input subject name: </th>
                 <td>
                     <input type="text" name="name" size="45"
                             value="<c:out value='${subject.name}' />" />

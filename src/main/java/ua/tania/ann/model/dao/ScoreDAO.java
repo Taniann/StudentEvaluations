@@ -45,8 +45,8 @@ public class ScoreDAO {
         return rowInserted;
     }
 
-    public Map<String, Integer> listAllScores(Student student) throws SQLException, ClassNotFoundException {
-        //List<Score> listScores = new ArrayList<>();
+   /* public List<Student>  listAllScores() throws SQLException, ClassNotFoundException {
+         List<Student> listStudentWithScores = new ArrayList<>();
          Map<String, Integer> mapScores = new HashMap<>();
 
         String sql = "SELECT* FROM score WHERE id_student = ? ";
@@ -70,8 +70,8 @@ public class ScoreDAO {
 
         disconnectFromDatabase();
 
-        return mapScores;
-    }
+        return listStudentWithScores;
+    }*/
 
     public boolean deleteScore(Score score) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM score where id = ?";

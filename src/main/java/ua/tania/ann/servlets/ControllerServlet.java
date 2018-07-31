@@ -1,7 +1,9 @@
 package ua.tania.ann.servlets;
 
+import ua.tania.ann.model.dao.ScoreDAO;
 import ua.tania.ann.model.dao.StudentDAO;
 import ua.tania.ann.model.dao.SubjectDAO;
+import ua.tania.ann.model.entities.Score;
 import ua.tania.ann.model.entities.Student;
 import ua.tania.ann.model.entities.Subject;
 
@@ -21,10 +23,12 @@ public class ControllerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private StudentDAO studentDAO;
     private SubjectDAO subjectDAO;
+    private ScoreDAO scoreDAO;
 
     public void init() {
         studentDAO = new StudentDAO();
         subjectDAO = new SubjectDAO();
+        scoreDAO = new ScoreDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -59,6 +63,12 @@ public class ControllerServlet extends HttpServlet {
                 case "/addSubject":
                     insertSubject(request, response);
                     break;
+                case "/addScores":
+                    showFormForScores(request, response);
+                    break;
+                case "/insertScore":
+                    insertScore(request, response);
+                    break;
                 default:
                     listStudent(request, response);
                     break;
@@ -90,6 +100,13 @@ public class ControllerServlet extends HttpServlet {
         Student existingStudent = studentDAO.getStudent(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("StudentForm.jsp");
         request.setAttribute("student", existingStudent);
+        dispatcher.forward(request, response);
+
+    }
+
+    private void showFormForScores(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException, ClassNotFoundException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ScoreForm.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -152,4 +169,13 @@ public class ControllerServlet extends HttpServlet {
         response.sendRedirect("listSubject");
     }
 
+    private void insertScore(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ClassNotFoundException {
+        int value = Integer.parseInt(request.getParameter("value"));
+        int studentId = Integer.parseInt(request.getParameter("id_student"));
+        String subjectName = request.getParameter("name_subject");
+        Score newScore = new Score(value, studentId, subjectName);
+        scoreDAO.insertScore(newScore);
+        response.sendRedirect("listScores");
+    }
 }
