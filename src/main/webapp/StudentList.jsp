@@ -52,6 +52,48 @@
                 </tr>
             </c:forEach>
         </table>
-    </div>
+         </div>
+        <table cellpadding="5">
+                <form method="post" action="filter" commandName="somedata">
+                <tr>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td>
+                <td>Please select just one option :)</td>
+                <td><select name="selectedKurs">
+                        <option selected="selected" value="all" >all</option>
+                        <option value="1">1</option>
+                        <option value="2" >2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select></td>
+                <td><select name="selectedGroup">
+                        <option selected="selected" value="all" >all</option>
+                        <option value="TM-41">TM-41</option>
+                        <option value="TM-31" >TM-31</option>
+                        <option value="TM-51">TR-51</option>
+                    </select></td>
+                <td><select name="selectedStudyForm">
+                         <option selected="selected" value="all" >all</option>
+                         <option value="full-time">full-time</option>
+                         <option value="external" >external</option>
+                    </select></td>
+                <td><select name="selectedPaymentForm">
+                         <option selected="selected" value="all">all</option>
+                         <option value="free">free</option>
+                         <option value="contract">contract</option>
+                    </select></td>
+                <td></td>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Filter" />
+                </td>
+            </tr>
+        </table>
+        </form>
 </body>
 </html>

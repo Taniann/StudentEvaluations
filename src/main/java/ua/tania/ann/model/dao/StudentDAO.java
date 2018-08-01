@@ -111,7 +111,7 @@ public class StudentDAO {
         return rowUpdated;
     }
 
-    public Student getStudent(int id) throws SQLException, ClassNotFoundException {
+    public Student getStudentById(int id) throws SQLException, ClassNotFoundException {
         Student student = null;
         String sql = "SELECT * FROM student WHERE id = ?";
 
@@ -121,6 +121,7 @@ public class StudentDAO {
         statement.setInt(1, id);
 
         ResultSet resultSet = statement.executeQuery();
+
 
         if (resultSet.next()) {
             String firstName = resultSet.getString("first_name");
@@ -137,5 +138,125 @@ public class StudentDAO {
         statement.close();
 
         return student;
+    }
+
+    public List<Student> getAllStudentByKurs(int kurs) throws SQLException, ClassNotFoundException {
+        List<Student> listStudents = new ArrayList<>();
+        String sql = "SELECT* FROM student WHERE kurs = ?";
+
+        connectToDatabase();
+
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setInt(1, kurs);
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String firstName = resultSet.getString("first_name");
+            String secondName = resultSet.getString("second_name");
+            String middleName = resultSet.getString("middle_name");
+          //  kurs = resultSet.getInt("kurs");
+            String grupa = resultSet.getString("grupa");
+            String studyForm = resultSet.getString("study_form");
+            String paymentForm = resultSet.getString("payment_form");
+            Student student = new Student(id, firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
+            listStudents.add(student);
+        }
+
+        resultSet.close();
+        statement.close();
+
+        return listStudents;
+    }
+
+    public List<Student> getAllStudentByGroup(String group) throws SQLException, ClassNotFoundException {
+        List<Student> listStudents = new ArrayList<>();
+        String sql = "SELECT* FROM student WHERE grupa = ?";
+
+        connectToDatabase();
+
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1, group);
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String firstName = resultSet.getString("first_name");
+            String secondName = resultSet.getString("second_name");
+            String middleName = resultSet.getString("middle_name");
+            int kurs = resultSet.getInt("kurs");
+            String grupa = resultSet.getString("grupa");
+            String studyForm = resultSet.getString("study_form");
+            String paymentForm = resultSet.getString("payment_form");
+            Student student = new Student(id, firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
+            listStudents.add(student);
+        }
+
+        resultSet.close();
+        statement.close();
+
+        return listStudents;
+    }
+
+    public List<Student> getAllStudentByStudyForm(String studyForm) throws SQLException, ClassNotFoundException {
+        List<Student> listStudents = new ArrayList<>();
+        String sql = "SELECT* FROM student WHERE study_form = ?";
+
+        connectToDatabase();
+
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1, studyForm);
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String firstName = resultSet.getString("first_name");
+            String secondName = resultSet.getString("second_name");
+            String middleName = resultSet.getString("middle_name");
+            int kurs = resultSet.getInt("kurs");
+            String grupa = resultSet.getString("grupa");
+            studyForm = resultSet.getString("study_form");
+            String paymentForm = resultSet.getString("payment_form");
+            Student student = new Student(id, firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
+            listStudents.add(student);
+        }
+
+        resultSet.close();
+        statement.close();
+
+        return listStudents;
+    }
+
+    public List<Student> getAllStudentByPaymentForm(String paymentForm) throws SQLException, ClassNotFoundException {
+        List<Student> listStudents = new ArrayList<>();
+        String sql = "SELECT* FROM student WHERE payment_form = ?";
+
+        connectToDatabase();
+
+        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
+        statement.setString(1, paymentForm);
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String firstName = resultSet.getString("first_name");
+            String secondName = resultSet.getString("second_name");
+            String middleName = resultSet.getString("middle_name");
+            int kurs = resultSet.getInt("kurs");
+            String grupa = resultSet.getString("grupa");
+            String studyForm = resultSet.getString("study_form");
+            paymentForm = resultSet.getString("payment_form");
+            Student student = new Student(id, firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
+            listStudents.add(student);
+        }
+
+        resultSet.close();
+        statement.close();
+
+        return listStudents;
     }
 }

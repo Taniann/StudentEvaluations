@@ -51,34 +51,37 @@
            <tr>
                  <th>Kurs: </th>
                  <td>
-                    <input type="number" name="kurs" size="5"
-                             value="<c:out value='${student.kurs}' />"
-                     />
+                 <select name="selectedKurs">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5" >5</option>
+                        <option value="6">6</option>
+                    </select>
                  </td>
             </tr>
             <tr>
                  <th>Grupa: </th>
-                 <td>
-                    <input type="text" name="grupa" size="5"
-                             value="<c:out value='${student.group}' />"
-                     />
-                 </td>
+                <td><select name="selectedGroup">
+                        <option value="TM-41">TM-41</option>
+                        <option value="TM-31" >TM-31</option>
+                        <option value="TM-51">TR-51</option>
+                    </select></td>
             </tr>
             <tr>
                  <th>Study form: </th>
-                 <td>
-                    <input type="text" name="study_form" size="5"
-                             value="<c:out value='${student.studyForm}' />"
-                     />
-                 </td>
+                <td><select name="selectedStudyForm">
+                         <option value="full-time">full-time</option>
+                         <option value="external">external</option>
+                    </select></td>
             </tr>
             <tr>
                  <th>Payment form: </th>
-                 <td>
-                    <input type="text" name="payment_form" size="5"
-                             value="<c:out value='${student.paymentForm}' />"
-                     />
-                 </td>
+                <td><select name="selectedPaymentForm">
+                         <option value="free">free</option>
+                         <option value="contract">contract</option>
+                    </select></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">

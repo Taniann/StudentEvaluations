@@ -72,6 +72,9 @@ public class ControllerServlet extends HttpServlet {
                 case "/listScores" :
                     listScores(request, response);
                     break;
+                case "/filter" :
+                    listStudentWithFilter(request, response);
+                    break;
                 default:
                     listStudent(request, response);
                     break;
@@ -91,6 +94,27 @@ public class ControllerServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void listStudentWithFilter(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException, ClassNotFoundException {
+        List<Student> listStudent;
+        String kurs = request.getParameter("selectedKurs");
+        String grupa = request.getParameter("selectedGroup");
+        String studyForm = request.getParameter("selectedStudyForm");
+        String paymentForm = request.getParameter("selectedPaymentForm");
+        if (!kurs.equals("all"))
+            listStudent = studentDAO.getAllStudentByKurs(Integer.parseInt(kurs));
+        else if (!grupa.equals("all"))
+            listStudent = studentDAO.getAllStudentByGroup(grupa);
+        else if (!studyForm.equals("all"))
+            listStudent = studentDAO.getAllStudentByStudyForm(studyForm);
+        else if (!paymentForm.equals("all"))
+            listStudent = studentDAO.getAllStudentByPaymentForm(paymentForm);
+        else listStudent = studentDAO.listAllStudents();
+        request.setAttribute("listStudent", listStudent);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("StudentList.jsp");
+        dispatcher.forward(request, response);
+    }
+
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("StudentForm.jsp");
@@ -100,7 +124,7 @@ public class ControllerServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException, ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Student existingStudent = studentDAO.getStudent(id);
+        Student existingStudent = studentDAO.getStudentById(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("StudentForm.jsp");
         request.setAttribute("student", existingStudent);
         dispatcher.forward(request, response);
@@ -119,10 +143,10 @@ public class ControllerServlet extends HttpServlet {
         String firstName = request.getParameter("first_name");
         String secondName = request.getParameter("second_name");
         String middleName = request.getParameter("middle_name");
-        int kurs = Integer.parseInt( request.getParameter("kurs"));
-        String grupa = request.getParameter("grupa");
-        String studyForm = request.getParameter("study_form");
-        String paymentForm = request.getParameter("payment_form");
+        int kurs = Integer.parseInt( request.getParameter("selectedKurs"));
+        String grupa = request.getParameter("selectedGroup");
+        String studyForm = request.getParameter("selectedStudyForm");
+        String paymentForm = request.getParameter("selectedPaymentForm");
 
         Student newStudent = new Student(firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
         studentDAO.insertStudent(newStudent);
@@ -135,10 +159,10 @@ public class ControllerServlet extends HttpServlet {
         String firstName = request.getParameter("first_name");
         String secondName = request.getParameter("second_name");
         String middleName = request.getParameter("middle_name");
-        int kurs = Integer.parseInt( request.getParameter("kurs"));
-        String grupa = request.getParameter("grupa");
-        String studyForm = request.getParameter("study_form");
-        String paymentForm = request.getParameter("payment_form");
+        int kurs = Integer.parseInt( request.getParameter("selectedKurs"));
+        String grupa = request.getParameter("selectedGroup");
+        String studyForm = request.getParameter("selectedStudyForm");
+        String paymentForm = request.getParameter("selectedPaymentForm");
 
         Student student = new Student(id,firstName, secondName, middleName, kurs, grupa, studyForm, paymentForm );
         studentDAO.updateStudent(student);

@@ -15,8 +15,6 @@ public class Student {
     private String group;
     private String studyForm;
     private String paymentForm;
-    private Map<Subject, Score> resultForFirstAtestation = new HashMap<>();
-    private Map<Subject, Score> resultForSecondAtestation = new HashMap<>();
     private Map<String, Integer> finalResult = new HashMap<>();
     private Double finalAverageValue;
 
@@ -115,22 +113,6 @@ public class Student {
 
     public void setKurs(int kurs) {
         this.kurs = kurs;
-    }
-
-    public Map<Subject, Score> getResultForFirstAtestation() {
-        return resultForFirstAtestation;
-    }
-
-    public void setResultForFirstAtestation(Map<Subject, Score> resultForFirstAtestation) {
-        this.resultForFirstAtestation = resultForFirstAtestation;
-    }
-
-    public Map<Subject, Score> getResultForSecondAtestation() {
-        return resultForSecondAtestation;
-    }
-
-    public void setResultForSecondAtestation(Map<Subject, Score> resultForSecondAtestation) {
-        this.resultForSecondAtestation = resultForSecondAtestation;
     }
 
     public Map<String, Integer> getFinalResult() {
