@@ -18,17 +18,18 @@
                 <th>First name</th>
                 <th>Second name</th>
                 <th>Middle name</th>
-                <th>Scores</th>
+                <th>Subject</th>
+                <th>Value</th>
             </tr>
             <c:forEach var="student" items="${listScore}">
                 <tr>
                     <td><c:out value="${student.firstName}" /></td>
                     <td><c:out value="${student.secondName}" /></td>
                     <td><c:out value="${student.middleName}" /></td>
-                    <td><c:forEach var="entry" items="${student.finalResult}">
-                          Subject: <c:out value="${entry.key}"/>
-                          Value: <c:out value="${entry.value}"/>
-                        </c:forEach></td>
+                    <c:forEach var="entry" items="${student.finalResult}">
+                          <td><c:out value="${entry.key}"/></td>
+                          <td><c:out value="${entry.value}"/></td>
+                        </c:forEach>
                 </tr>
             </c:forEach>
         </table>

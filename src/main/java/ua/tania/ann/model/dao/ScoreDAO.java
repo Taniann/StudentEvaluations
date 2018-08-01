@@ -2,14 +2,11 @@ package ua.tania.ann.model.dao;
 
 import ua.tania.ann.model.entities.Score;
 import ua.tania.ann.model.entities.Student;
-import ua.tania.ann.model.entities.Subject;
 import ua.tania.ann.utils.MySqlConnUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Таня on 31.07.2018.
