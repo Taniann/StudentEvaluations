@@ -69,6 +69,9 @@ public class ControllerServlet extends HttpServlet {
                 case "/insertScore":
                     insertScore(request, response);
                     break;
+                case "/listScores" :
+                    listScores(request, response);
+                    break;
                 default:
                     listStudent(request, response);
                     break;
@@ -157,6 +160,14 @@ public class ControllerServlet extends HttpServlet {
         List<Subject> listSubject = subjectDAO.listAllSubjects();
         request.setAttribute("listSubject", listSubject);
         RequestDispatcher dispatcher = request.getRequestDispatcher("SubjectList.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void listScores(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException, ClassNotFoundException {
+        List<Student> listScores = scoreDAO.listAllScores();
+        request.setAttribute("listScore", listScores);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ScoreList.jsp");
         dispatcher.forward(request, response);
     }
 

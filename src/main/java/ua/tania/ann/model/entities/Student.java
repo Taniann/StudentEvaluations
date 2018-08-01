@@ -42,6 +42,13 @@ public class Student {
         this.paymentForm = paymentForm;
     }
 
+    public Student(int id, String firstName, String secondName, String middleName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.middleName = middleName;
+    }
+
     public Student(int id) {
         this.id = id;
     }

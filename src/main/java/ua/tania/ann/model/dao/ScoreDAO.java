@@ -45,11 +45,10 @@ public class ScoreDAO {
         return rowInserted;
     }
 
-   /* public List<Student>  listAllScores() throws SQLException, ClassNotFoundException {
+    public List<Student>  listAllScores() throws SQLException, ClassNotFoundException {
          List<Student> listStudentWithScores = new ArrayList<>();
-         Map<String, Integer> mapScores = new HashMap<>();
 
-        String sql = "SELECT* FROM score WHERE id_student = ? ";
+        String sql = "SELECT* FROM score, student WHERE score.id_student = student.id";
 
         connectToDatabase();
 
@@ -57,12 +56,15 @@ public class ScoreDAO {
         ResultSet resultSet = statement.executeQuery(sql);
 
         while (resultSet.next()) {
-            int id = resultSet.getInt("id");
+            int idStudent = resultSet.getInt("id_student");
             String subjectName = resultSet.getString("name_subject");
             int value = resultSet.getInt("value");
-            Score score = new Score(id, value, student.getId(), subjectName);
-            //listScores.add(score);
-            mapScores.put(subjectName, score.getValue());
+            String firstName = resultSet.getString("first_name");
+            String secondName = resultSet.getString("second_name");
+            String middleName = resultSet.getString("middle_name");
+            Student student = new Student(idStudent, firstName, secondName, middleName);
+            student.getFinalResult().put(subjectName, value);
+            listStudentWithScores.add(student);
         }
 
         resultSet.close();
@@ -71,7 +73,7 @@ public class ScoreDAO {
         disconnectFromDatabase();
 
         return listStudentWithScores;
-    }*/
+    }
 
     public boolean deleteScore(Score score) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM score where id = ?";
