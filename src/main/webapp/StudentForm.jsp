@@ -66,7 +66,7 @@
                 <td><select name="selectedGroup">
                         <option value="TM-41">TM-41</option>
                         <option value="TM-31" >TM-31</option>
-                        <option value="TM-51">TR-51</option>
+                        <option value="TR-51">TR-51</option>
                     </select></td>
             </tr>
             <tr>

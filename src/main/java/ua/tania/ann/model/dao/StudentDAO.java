@@ -151,7 +151,7 @@ public class StudentDAO {
 
         ResultSet resultSet = statement.executeQuery();
 
-        if (resultSet.next()) {
+        while (resultSet.next()) {
             int id = resultSet.getInt("id");
             String firstName = resultSet.getString("first_name");
             String secondName = resultSet.getString("second_name");
@@ -180,7 +180,7 @@ public class StudentDAO {
 
         ResultSet resultSet = statement.executeQuery();
 
-        if (resultSet.next()) {
+        while (resultSet.next()) {
             int id = resultSet.getInt("id");
             String firstName = resultSet.getString("first_name");
             String secondName = resultSet.getString("second_name");
@@ -210,7 +210,7 @@ public class StudentDAO {
 
         ResultSet resultSet = statement.executeQuery();
 
-        if (resultSet.next()) {
+        while (resultSet.next()) {
             int id = resultSet.getInt("id");
             String firstName = resultSet.getString("first_name");
             String secondName = resultSet.getString("second_name");
@@ -240,7 +240,7 @@ public class StudentDAO {
 
         ResultSet resultSet = statement.executeQuery();
 
-        if (resultSet.next()) {
+        while (resultSet.next()) {
             int id = resultSet.getInt("id");
             String firstName = resultSet.getString("first_name");
             String secondName = resultSet.getString("second_name");
