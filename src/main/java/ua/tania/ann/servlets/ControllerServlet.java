@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Таня on 25.07.2018.
@@ -189,8 +190,8 @@ public class ControllerServlet extends HttpServlet {
 
     private void listScores(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException, ClassNotFoundException {
-        List<Student> listScores = scoreDAO.listAllScores();
-        request.setAttribute("listScore", listScores);
+        Map<Student, Map<Subject, Score>> mapScores = scoreDAO.listAllScores();
+        request.setAttribute("mapScore", mapScores);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ScoreList.jsp");
         dispatcher.forward(request, response);
     }
@@ -208,7 +209,7 @@ public class ControllerServlet extends HttpServlet {
             throws SQLException, IOException, ClassNotFoundException {
         int value = Integer.parseInt(request.getParameter("value"));
         int studentId = Integer.parseInt(request.getParameter("id_student"));
-        String subjectName = request.getParameter("name_subject");
+        String subjectName = request.getParameter("selectedSubject");
         Score newScore = new Score(value, studentId, subjectName);
         scoreDAO.insertScore(newScore);
         response.sendRedirect("listScores");

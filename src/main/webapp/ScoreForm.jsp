@@ -32,11 +32,15 @@
             </tr>
             <tr>
                 <th>Subject name: </th>
-                <td>
-                    <input type="text" name="name_subject" size="45"
-                            value="<c:out value='${score.subjectName}' />"
-                    />
-                </td>
+                 <td>
+                 <select name="selectedSubject">
+                        <option value="Maths">Maths</option>
+                        <option value="OOP">OOP</option>
+                        <option value="Database">Database</option>
+                        <option value="Operating system">Operating system</option>
+                        <option value="Philosophy" >Philosophy</option>
+                    </select>
+                 </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">

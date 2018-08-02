@@ -17,20 +17,17 @@
             <tr>
                 <th>First name</th>
                 <th>Second name</th>
-                <th>Middle name</th>
-                <th>Subject</th>
-                <th>Value</th>
+                <th>Scores</th>
+             </tr>
+            <c:forEach var="student" items="${mapScore}">
+            <tr>
+                    <td><c:out value="${student.key.firstName}" /></td>
+                    <td><c:out value="${student.key.secondName}" /></td>
+                    <td><c:forEach var="entry" items="${student.value}">
+                         <c:out value="${entry.key.name}"/>
+                         <c:out value="${entry.value.value}"/>
+                    </c:forEach></td>
             </tr>
-            <c:forEach var="student" items="${listScore}">
-                <tr>
-                    <td><c:out value="${student.firstName}" /></td>
-                    <td><c:out value="${student.secondName}" /></td>
-                    <td><c:out value="${student.middleName}" /></td>
-                    <c:forEach var="entry" items="${student.finalResult}">
-                          <td><c:out value="${entry.key}"/></td>
-                          <td><c:out value="${entry.value}"/></td>
-                        </c:forEach>
-                </tr>
             </c:forEach>
         </table>
     </div>

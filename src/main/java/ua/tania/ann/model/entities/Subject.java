@@ -7,12 +7,12 @@ public class Subject {
     private int id;
     private String name;
 
-    public Subject(String name) {
+    public Subject(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public Subject(int id, String name) {
-        this.id = id;
+    public Subject(String name) {
         this.name = name;
     }
 

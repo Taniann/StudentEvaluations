@@ -156,7 +156,6 @@ public class StudentDAO {
             String firstName = resultSet.getString("first_name");
             String secondName = resultSet.getString("second_name");
             String middleName = resultSet.getString("middle_name");
-          //  kurs = resultSet.getInt("kurs");
             String grupa = resultSet.getString("grupa");
             String studyForm = resultSet.getString("study_form");
             String paymentForm = resultSet.getString("payment_form");

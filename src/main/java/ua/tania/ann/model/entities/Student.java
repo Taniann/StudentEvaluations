@@ -15,7 +15,8 @@ public class Student {
     private String group;
     private String studyForm;
     private String paymentForm;
-    private Map<String, Integer> finalResult = new HashMap<>();
+    private Map<String, Integer> finalResult1 = new HashMap<>();
+    private Map<Subject, Score> finalResult = new HashMap<>();
     private Double finalAverageValue;
 
     public Student(int id, String firstName, String secondName, String middleName, int kurs, String group,
@@ -40,11 +41,10 @@ public class Student {
         this.paymentForm = paymentForm;
     }
 
-    public Student(int id, String firstName, String secondName, String middleName) {
+    public Student(int id, String firstName, String secondName) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
-        this.middleName = middleName;
     }
 
     public Student(int id) {
@@ -115,11 +115,19 @@ public class Student {
         this.kurs = kurs;
     }
 
-    public Map<String, Integer> getFinalResult() {
+   /* public Map<String, Integer> getFinalResult() {
+        return finalResult;
+    }*/
+
+    /*public void setFinalResult(Map<String, Integer> finalResult) {
+        this.finalResult = finalResult;
+    }*/
+
+    public Map<Subject, Score> getFinalResult() {
         return finalResult;
     }
 
-    public void setFinalResult(Map<String, Integer> finalResult) {
+    public void setFinalResult(Map<Subject, Score> finalResult) {
         this.finalResult = finalResult;
     }
 

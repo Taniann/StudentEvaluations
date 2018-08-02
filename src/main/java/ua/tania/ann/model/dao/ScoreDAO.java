@@ -2,11 +2,14 @@ package ua.tania.ann.model.dao;
 
 import ua.tania.ann.model.entities.Score;
 import ua.tania.ann.model.entities.Student;
+import ua.tania.ann.model.entities.Subject;
 import ua.tania.ann.utils.MySqlConnUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Таня on 31.07.2018.
@@ -42,26 +45,31 @@ public class ScoreDAO {
         return rowInserted;
     }
 
-    public List<Student>  listAllScores() throws SQLException, ClassNotFoundException {
-         List<Student> listStudentWithScores = new ArrayList<>();
+    public Map<Student, Map<Subject, Score>>  listAllScores() throws SQLException, ClassNotFoundException {
+        Map<Student, Map<Subject, Score>> mapStudentWithScores = new HashMap<>();
+        Student student = null;
 
-        String sql = "SELECT* FROM score, student WHERE score.id_student = student.id";
+        String sql = "SELECT* FROM student, score, subject WHERE score.id_student = student.id AND score.name_subject = subject.name ";
 
         connectToDatabase();
 
         Statement statement = jdbcConnection.createStatement();
         ResultSet resultSet = statement.executeQuery(sql);
+       // Student student = new Student(resultSet.getInt("id"), resultSet.getString("first_name"), resultSet.getString("second_name"));
 
         while (resultSet.next()) {
-            int idStudent = resultSet.getInt("id_student");
+            int idStudent = resultSet.getInt("id");
             String subjectName = resultSet.getString("name_subject");
             int value = resultSet.getInt("value");
             String firstName = resultSet.getString("first_name");
             String secondName = resultSet.getString("second_name");
-            String middleName = resultSet.getString("middle_name");
-            Student student = new Student(idStudent, firstName, secondName, middleName);
-            student.getFinalResult().put(subjectName, value);
-            listStudentWithScores.add(student);
+            if (student == null || student.getId() != idStudent) {
+                student = new Student(idStudent, firstName, secondName);
+            }
+            Score score = new Score(value, subjectName);
+            Subject subject = new Subject(subjectName);
+            student.getFinalResult().put(subject, score);
+            mapStudentWithScores.put(student, student.getFinalResult());
         }
 
         resultSet.close();
@@ -69,7 +77,7 @@ public class ScoreDAO {
 
         disconnectFromDatabase();
 
-        return listStudentWithScores;
+        return mapStudentWithScores;
     }
 
     public boolean deleteScore(Score score) throws SQLException, ClassNotFoundException {
